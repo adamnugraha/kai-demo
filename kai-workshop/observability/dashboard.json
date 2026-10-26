@@ -1,0 +1,121 @@
+{
+  "uid": "rail-workshop",
+  "title": "RailBooking client experience",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "5s",
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Search success, last minute",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "rail-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "1 - sum(rate(rail_probe_bad_total[1m])) / clamp_min(sum(rate(rail_probe_eligible_total[1m])), 0.001)",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Search error budget burn, 99.9% target",
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "rail-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(rail_probe_bad_total[1m])) / clamp_min(sum(rate(rail_probe_eligible_total[1m])), 0.001) / 0.001",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "type": "timeseries",
+      "title": "Successful searches within one second",
+      "gridPos": {
+        "x": 0,
+        "y": 9,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "rail-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(rail_probe_good_under_1s_total[1m])) / clamp_min(sum(rate(rail_probe_eligible_total[1m])), 0.001)",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "type": "timeseries",
+      "title": "Client requests per second",
+      "gridPos": {
+        "x": 12,
+        "y": 9,
+        "w": 12,
+        "h": 9
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "rail-prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(rail_probe_eligible_total[1m]))",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      }
+    }
+  ]
+}

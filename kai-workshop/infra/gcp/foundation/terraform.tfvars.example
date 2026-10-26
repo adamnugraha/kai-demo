@@ -1,0 +1,5 @@
+project_id = "YOUR-DEDICATED-LAB-PROJECT"
+region = "asia-southeast2"
+database_ha = false
+# Supply TF_VAR_sql_admin_password in your local shell. Do not write it here.
+# Terraform still stores the password in state. Protect the state accordingly.

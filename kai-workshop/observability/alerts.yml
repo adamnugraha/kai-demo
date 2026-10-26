@@ -1,0 +1,15 @@
+groups:
+  - name: workshop-only
+    rules:
+      - alert: RailSearchLabFailure
+        expr: rate(rail_probe_bad_total[1m]) / clamp_min(rate(rail_probe_eligible_total[1m]), 0.001) > 0.02
+        for: 15s
+        labels: {severity: workshop}
+        annotations:
+          summary: Search failures exceed the accelerated workshop threshold
+          description: This 1-minute rule is for demonstration. Production paging uses reviewed burn-rate windows and traffic volume gates.
+      - alert: RailProbeMissing
+        expr: up{job="rail-client-probe"} == 0
+        for: 30s
+        labels: {severity: workshop}
+        annotations: {summary: Client probe telemetry is unavailable}

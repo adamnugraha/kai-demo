@@ -1,0 +1,24 @@
+name: kai-workshop
+services:
+  app:
+    build: .
+    ports: ["127.0.0.1:8080:8080"]
+    environment:
+      LAB_TOKEN: ${LAB_TOKEN:?Run python3 ops/new-env.py}
+      DB_PROVIDER: sqlite
+      DB_CONNECTION: Data Source=/data/railbooking.db;Default Timeout=30
+      AUTO_INIT: "true"
+      NOTIFIER_URL: http://mock:8082
+      RUN_WORKER: "false"
+      FAULT_PERCENT: ${FAULT_PERCENT:-0}
+      APP_VERSION: ${APP_VERSION:-modern-v1}
+    volumes: ["./data/app:/data"]
+  mock:
+    build:
+      context: .
+      dockerfile: Dockerfile.mock
+    ports: ["127.0.0.1:8082:8082"]
+    environment:
+      LAB_TOKEN: ${LAB_TOKEN:?Run python3 ops/new-env.py}
+      MOCK_DB: Data Source=/data/notifications.db;Default Timeout=30
+    volumes: ["./data/mock:/data"]

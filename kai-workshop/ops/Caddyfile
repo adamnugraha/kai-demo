@@ -1,0 +1,5 @@
+{$NOTIFY_DOMAIN} {
+    @notify path /notify
+    reverse_proxy @notify mock:8082
+    respond 404
+}

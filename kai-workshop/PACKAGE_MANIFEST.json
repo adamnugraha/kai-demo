@@ -1,0 +1,291 @@
+{
+  "package": "KAI Workshop Lab Pack",
+  "prepared": "2026-10-26",
+  "event": "2026-10-30 morning Asia/Jakarta",
+  "files": [
+    {
+      "path": ".dockerignore",
+      "sha256": "5cee24846bdb65deace11374b60ac7514842ec9a91c476c19b073871b0492381"
+    },
+    {
+      "path": ".github/workflows/verify.yml",
+      "sha256": "f64bf7b39813984e614d922ec28eb650f6370ca2dd43aba7f642345f0b45fe9c"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f524aeac2ae4f466feae48f17093b9691bc65c8f08cce28fdff643b05b085c0d"
+    },
+    {
+      "path": "Directory.Build.props",
+      "sha256": "a6ea020d29adbdbdbc20bf2f8291ae66fb2dad1980a43f44b5556781d84b7c2b"
+    },
+    {
+      "path": "Dockerfile",
+      "sha256": "57dd1322f35faeb3c160eb290bbf69c7942bd96c33f236216adff4f0662ad86a"
+    },
+    {
+      "path": "Dockerfile.mock",
+      "sha256": "6edb96494c11c1e5cfecd07949f136336aae8adade568ed8ccfca99d87990304"
+    },
+    {
+      "path": "README.md",
+      "sha256": "da2be69f0f4569f5fd9849d73fe0af4a73b38ef959b75d20fa71e8b4c5806c91"
+    },
+    {
+      "path": "compose.https.yaml",
+      "sha256": "5b8d6b85d12120da555abeaccd50c81b255821d82ad8dd5fc02c6808610e5341"
+    },
+    {
+      "path": "compose.observability.yaml",
+      "sha256": "dd8ce48222f01a81232719ac30f3573b95923c649e2d71611125c582d056b190"
+    },
+    {
+      "path": "compose.sqlserver.yaml",
+      "sha256": "ad70a95831e123763579ae2a249ca1b6ab97e53485fabbc8fdd79072101a82cf"
+    },
+    {
+      "path": "compose.yaml",
+      "sha256": "63b4ea569ca76e469c85cce995f19fc7d44b95de7020df0a70fcf8e1f0692b9c"
+    },
+    {
+      "path": "docs/ACCESS.md",
+      "sha256": "0ab1e6f6b6ca05c3d28f5369dd9e145adbb3d60d308f86aef59f7666ba233a7b"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "sha256": "edcd6e1248768251815a01f23571afd1de3019d770d3ebc9dfee910a922f61ea"
+    },
+    {
+      "path": "docs/AWS.md",
+      "sha256": "caa26ee4c4836dde61dd917be21d6bc3e6bf280cb0dd836f940caa76530bb264"
+    },
+    {
+      "path": "docs/DEMO-RUNBOOK.md",
+      "sha256": "20f5e88e6285ff98ac9e9d313ed9ba9e0066ce2c103009e3dd3198b1bd84b38e"
+    },
+    {
+      "path": "docs/GCP.md",
+      "sha256": "f5cab0866812c8fc83eaddb9fc15af375aabc9ed2f6e516a00ffa8d15ff18b4b"
+    },
+    {
+      "path": "docs/LOCAL-LAB.md",
+      "sha256": "90d70eb9237ccf6a352f0ef960d90be356603ce1885ab1b803ea6a2f8c68e8c8"
+    },
+    {
+      "path": "docs/SOURCES.md",
+      "sha256": "25062e4acb1236cdb7bd06a14ff18aafde60a8d1247655f8310280d20880ac7a"
+    },
+    {
+      "path": "docs/VALIDATION.md",
+      "sha256": "2d8fe2ece25d0035a82529c5eeae50a4e1c1e0dc387f739f3622b9e37f8f3cc6"
+    },
+    {
+      "path": "docs/WINDOWS-LEGACY.md",
+      "sha256": "c10cc13c9a443ab2ec2b722f660a1999ea47e40630e91310367d855153a3ec1b"
+    },
+    {
+      "path": "infra/aws/ecs-app.yaml",
+      "sha256": "fbb33cc098ba22ef46f0fc396e7fd29c766ad0e40c86a4589cb353f0418b1092"
+    },
+    {
+      "path": "infra/gcp/.terraform.lock.hcl",
+      "sha256": "3c057a17815f7ff346a181540761e206b55c4b79b81ebea8cde1fbf17b90908c"
+    },
+    {
+      "path": "infra/gcp/foundation/.terraform.lock.hcl",
+      "sha256": "3c057a17815f7ff346a181540761e206b55c4b79b81ebea8cde1fbf17b90908c"
+    },
+    {
+      "path": "infra/gcp/foundation/main.tf",
+      "sha256": "9f1ac9aadcbf643941c2896473cbbb556f2aa22228352a461adfc3d8905ca8d1"
+    },
+    {
+      "path": "infra/gcp/foundation/terraform.tfvars.example",
+      "sha256": "a59327675575b58d54a36ac786fe000636a1461b2599ba19997b83fdccfd1d64"
+    },
+    {
+      "path": "infra/gcp/main.tf",
+      "sha256": "7f2ec8b3c9eebddad23521d17260242e507056dfe6cefdc278e3c959d70fb25b"
+    },
+    {
+      "path": "infra/gcp/terraform.tfvars.example",
+      "sha256": "103f87836e7b895a5341ded95aab31bfffe1a12d67a1bc657c30b4f642bd3d6b"
+    },
+    {
+      "path": "observability/alerts.yml",
+      "sha256": "6c86fc768a49a6a0233f9d093d4b5d9ed5d9e1eff6927daa58cce05d60c7f2f7"
+    },
+    {
+      "path": "observability/dashboard.json",
+      "sha256": "eb9838f46dcfae05fadeb6bdeae3e1774f771db393630962b14f069ceee81bcc"
+    },
+    {
+      "path": "observability/prometheus.yml",
+      "sha256": "1a709a3a6cc9eef04874e55187ff88558715de3b80f2fe579d38dd2e89728b6a"
+    },
+    {
+      "path": "observability/provisioning/dashboards/provider.yml",
+      "sha256": "b1a2c5733c0325c407cc1d1c41aaeae1509f61599fb65e37b5e63849666f474b"
+    },
+    {
+      "path": "observability/provisioning/datasources/source.yml",
+      "sha256": "a2277653f77ffe9474108436705d3adf6b235c86e6ddb425eeec713fd268f771"
+    },
+    {
+      "path": "ops/Caddyfile",
+      "sha256": "2af4e5189e35292c1cd6e0b800d58d65295f750292e33784bea3731c172276cd"
+    },
+    {
+      "path": "ops/Publish-Legacy.ps1",
+      "sha256": "34cc0933e05a4d41ab3bcadd7b5e2f2ddae67d036410c4ce43e5c36c7ba9c5d8"
+    },
+    {
+      "path": "ops/gcp-rollout.sh",
+      "sha256": "48a34e9ef850a6f92109ec26fd68fc852c4d1291481c929587fa6bebf05bbf95"
+    },
+    {
+      "path": "ops/lab.py",
+      "sha256": "8b2a9e5af95e7393cf3b22767de005b15e1ae68438ff8eb8e7fffb151e5a703d"
+    },
+    {
+      "path": "ops/local-start.sh",
+      "sha256": "71642598c2987d0735f59a6cbe4774eae8219f72853b3a8461fd239c7771ca6a"
+    },
+    {
+      "path": "ops/new-env.py",
+      "sha256": "cf134b15a0f715eac74cc738a5c89c38465a0b50a1991d042980fb1e2ca883c8"
+    },
+    {
+      "path": "ops/probe.py",
+      "sha256": "611d7c049296e5127dc30343479803f1f0522e9425f6aa446a06f28772d0b2cd"
+    },
+    {
+      "path": "presentation/KAI_Modernization_and_SRE_30Oct2026.pptx",
+      "sha256": "ec3a9a6e24610c86fc7289526975448c14fb89d229cb25a162e173973b295573"
+    },
+    {
+      "path": "presentation/Presenter_Notes.md",
+      "sha256": "8bec4eece54a97e7bc4c42f1d6984c57759172b9e2fa516a9ec3c3e91bfbb0f3"
+    },
+    {
+      "path": "presentation/README.md",
+      "sha256": "f669c4c882a39731d555855ce5fbaa9d089e452e95f9c5de93afb1f42e94ff91"
+    },
+    {
+      "path": "src/RailBooking.Core/RailBooking.Core.csproj",
+      "sha256": "a1014efc19630d07029eb6eea14ffd36ad6d5e63e21bf368a3c30937319f3182"
+    },
+    {
+      "path": "src/RailBooking.Core/Store.cs",
+      "sha256": "86f8919b042e3313f7cb85e02ee789ed2ec58789e75ccea75cd045538c958370"
+    },
+    {
+      "path": "src/RailBooking.Core/packages.lock.json",
+      "sha256": "00d9e92c7bc1e7939bc82114d870ab6657841901237cab1daa8ed01cac976e5e"
+    },
+    {
+      "path": "src/RailBooking.Legacy/Controllers/RailController.cs",
+      "sha256": "63bc6e2272f7c41aa68277ed4762508e97b768facd0452a9d8b4aede7aec3aec"
+    },
+    {
+      "path": "src/RailBooking.Legacy/Global.asax",
+      "sha256": "d74251d01e5e1ff65b123987cf4839ffdd17f54ce2f805af9a1ac133985585bf"
+    },
+    {
+      "path": "src/RailBooking.Legacy/Global.asax.cs",
+      "sha256": "14e8cf7c97dd1932f0e23ac6544b5f4ba652a2736df72a1167ff96d431380bb3"
+    },
+    {
+      "path": "src/RailBooking.Legacy/RailBooking.Legacy.csproj",
+      "sha256": "59d7046e85eaa249e75d99ffd06fc806e281ef71b470fec7dc79ce22b0ebe65c"
+    },
+    {
+      "path": "src/RailBooking.Legacy/Web.config",
+      "sha256": "8d88bafd36720660cc4cfc97c3acbd698eaa38992182eb0b8cd093217d3db5e8"
+    },
+    {
+      "path": "src/RailBooking.Legacy/packages.lock.json",
+      "sha256": "f50940f1d0aaa19b7c702a8a77d1900db5e15bad850a2bec08207d0a18c40f64"
+    },
+    {
+      "path": "src/RailBooking.Mock/Program.cs",
+      "sha256": "2bca5421d43948f27824eeae11e496b72e951351455dde09204075241c5cb4bb"
+    },
+    {
+      "path": "src/RailBooking.Mock/RailBooking.Mock.csproj",
+      "sha256": "7a5bd681ad4aac291d019261a8ac23f4814cd464f17755768566668db2ffe495"
+    },
+    {
+      "path": "src/RailBooking.Mock/packages.lock.json",
+      "sha256": "59401a39d47e7326dc9b5f44ab7ca3d26997e5f2dd58a88995f93ad756e9240b"
+    },
+    {
+      "path": "src/RailBooking.Modern/Program.cs",
+      "sha256": "9d59447c392659307f19aeac2d499e3344350b57c9f82782af13e11d8d33bcfe"
+    },
+    {
+      "path": "src/RailBooking.Modern/RailBooking.Modern.csproj",
+      "sha256": "cad1b737d161e9e4fbf0930a4fdad8bf7dbc31e7ea623c03c32b369847950513"
+    },
+    {
+      "path": "src/RailBooking.Modern/packages.lock.json",
+      "sha256": "fa82c8eceb8efcfdaabbeabd9c976f4ba6b20818848e4c04c8c7447af4d5753b"
+    },
+    {
+      "path": "src/RailBooking.Modern/wwwroot/index.html",
+      "sha256": "f134de9cd98bbdb3a4ed4a6431b40cffda08affdd9ff57b8ce298366c75fbf71"
+    },
+    {
+      "path": "templates/01-application-assessment.md",
+      "sha256": "9be87b6f33d3907e29c18822e1347d1e349e4b825ac46c77d6fe9cf378712a0e"
+    },
+    {
+      "path": "templates/02-slo-worksheet.md",
+      "sha256": "757b1b44b914a583f7cbd32bd8341ef75ebe49b35df045a6d37baf330d79b183"
+    },
+    {
+      "path": "templates/03-error-budget-policy.md",
+      "sha256": "413a23d96df41bec4ec9a478abb3651d72172c18a910c79467d9703eb6aea4bb"
+    },
+    {
+      "path": "templates/04-incident-runbook.md",
+      "sha256": "d7a4b56444a1a8646db91dbf1e728c5b100f766abee5ca9f2b84ddc53b0246fd"
+    },
+    {
+      "path": "templates/05-postmortem.md",
+      "sha256": "a4a5e1a20e326b452b7e8435e70bb6c960a17483a99fdde0b2fcbe8cf5cab0aa"
+    },
+    {
+      "path": "templates/06-sit-uat-checklist.md",
+      "sha256": "6697432a58e0b6b26f3c32d9c1cbfa4373fcc2d070334216544765461174d164"
+    },
+    {
+      "path": "templates/07-pilot-charter.md",
+      "sha256": "623339f15f1c3303521c5abc92ad91bf691f9561ffd4ac3e482ca215025272dc"
+    },
+    {
+      "path": "templates/08-rehearsal-and-access-intake.md",
+      "sha256": "0f361a7bec4e664a1b6f03ee16585eabe88522ac2b8047b72ed4b55045f5c911"
+    },
+    {
+      "path": "tests/Program.cs",
+      "sha256": "7ffd10f22e7b340a3e70b28c91f51c4c02d9d32281b75363e8394e24ef8cc3a0"
+    },
+    {
+      "path": "tests/RailBooking.Tests.csproj",
+      "sha256": "e2620a604d1f3af7253c00317c6f045398521e8417c1edf85dd23129747945c8"
+    },
+    {
+      "path": "tests/http_smoke.py",
+      "sha256": "e495e9f880c4c00da54800739705548c4cde9eb775764200e53e6cf41cbdf1dd"
+    },
+    {
+      "path": "tests/load.js",
+      "sha256": "4e5ae9c7fcd3f20ae09df036c52866f9279727e73ffb42c6780e2cd5fee4c775"
+    },
+    {
+      "path": "tests/packages.lock.json",
+      "sha256": "7f811104677a0bb58989e2fefe95f9fe5e91338be1cf33ed2c6f4d99e097109d"
+    }
+  ]
+}

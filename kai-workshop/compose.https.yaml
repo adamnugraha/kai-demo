@@ -1,0 +1,10 @@
+# Optional HTTPS for the mock dependency only. Requires DNS and inbound 80/443.
+services:
+  caddy:
+    image: caddy:2
+    ports: ["80:80", "443:443"]
+    environment:
+      NOTIFY_DOMAIN: ${NOTIFY_DOMAIN:?Set the DNS hostname pointing to this VPS}
+    volumes: ["./ops/Caddyfile:/etc/caddy/Caddyfile:ro", "caddy-data:/data"]
+volumes:
+  caddy-data:

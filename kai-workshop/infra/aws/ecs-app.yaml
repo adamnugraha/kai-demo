@@ -1,0 +1,113 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: KAI workshop application on Fargate. Existing VPC, SQL Server, secrets and TLS certificate required.
+Parameters:
+  VpcId: {Type: 'AWS::EC2::VPC::Id'}
+  PublicSubnets: {Type: 'List<AWS::EC2::Subnet::Id>', Description: Two subnets in different AZs with internet gateway routes}
+  Image: {Type: String, Description: Full ECR image URI with rehearsed tag or digest}
+  CertificateArn: {Type: String, Description: ACM certificate in this region for your lab hostname}
+  AllowedClientCidr: {Type: String, Description: Presenter or VPS source CIDR. Avoid unrestricted access}
+  DbSecretArn: {Type: String, Description: SecretString is the complete SQL Server connection string}
+  TokenSecretArn: {Type: String, Description: SecretString is the lab token}
+  NotifierUrl: {Type: String, Description: Authenticated HTTPS endpoint on the VPS}
+Resources:
+  Logs:
+    Type: AWS::Logs::LogGroup
+    Properties: {RetentionInDays: 7}
+  Cluster:
+    Type: AWS::ECS::Cluster
+  AlbSg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: KAI presenter HTTPS access
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - {IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: !Ref AllowedClientCidr}
+  TaskSg:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: KAI Fargate tasks
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - {IpProtocol: tcp, FromPort: 8080, ToPort: 8080, SourceSecurityGroupId: !Ref AlbSg}
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - {Effect: Allow, Principal: {Service: ecs-tasks.amazonaws.com}, Action: 'sts:AssumeRole'}
+      ManagedPolicyArns: [!Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy']
+      Policies:
+        - PolicyName: ReadLabSecrets
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - {Effect: Allow, Action: 'secretsmanager:GetSecretValue', Resource: [!Ref DbSecretArn, !Ref TokenSecretArn]}
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - {Effect: Allow, Principal: {Service: ecs-tasks.amazonaws.com}, Action: 'sts:AssumeRole'}
+  Task:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      RequiresCompatibilities: [FARGATE]
+      NetworkMode: awsvpc
+      Cpu: '512'
+      Memory: '1024'
+      ExecutionRoleArn: !GetAtt ExecutionRole.Arn
+      TaskRoleArn: !GetAtt TaskRole.Arn
+      RuntimePlatform: {CpuArchitecture: X86_64, OperatingSystemFamily: LINUX}
+      ContainerDefinitions:
+        - Name: app
+          Image: !Ref Image
+          Essential: true
+          PortMappings: [{ContainerPort: 8080, Protocol: tcp}]
+          Environment:
+            - {Name: DB_PROVIDER, Value: sqlserver}
+            - {Name: AUTO_INIT, Value: 'false'}
+            - {Name: RUN_WORKER, Value: 'false'}
+            - {Name: NOTIFIER_URL, Value: !Ref NotifierUrl}
+            - {Name: APP_VERSION, Value: modern-v1}
+          Secrets:
+            - {Name: DB_CONNECTION, ValueFrom: !Ref DbSecretArn}
+            - {Name: LAB_TOKEN, ValueFrom: !Ref TokenSecretArn}
+          LogConfiguration:
+            LogDriver: awslogs
+            Options: {awslogs-group: !Ref Logs, awslogs-region: !Ref 'AWS::Region', awslogs-stream-prefix: app}
+  Alb:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties: {Subnets: !Ref PublicSubnets, SecurityGroups: [!Ref AlbSg], Scheme: internet-facing}
+  Target:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties: {VpcId: !Ref VpcId, Port: 8080, Protocol: HTTP, TargetType: ip, HealthCheckPath: /health/ready}
+  Listener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref Alb
+      Port: 443
+      Protocol: HTTPS
+      Certificates: [{CertificateArn: !Ref CertificateArn}]
+      DefaultActions: [{Type: forward, TargetGroupArn: !Ref Target}]
+  Service:
+    Type: AWS::ECS::Service
+    DependsOn: Listener
+    Properties:
+      Cluster: !Ref Cluster
+      TaskDefinition: !Ref Task
+      DesiredCount: 2
+      LaunchType: FARGATE
+      HealthCheckGracePeriodSeconds: 90
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+        DeploymentCircuitBreaker: {Enable: true, Rollback: true}
+      NetworkConfiguration:
+        AwsvpcConfiguration: {AssignPublicIp: ENABLED, Subnets: !Ref PublicSubnets, SecurityGroups: [!Ref TaskSg]}
+      LoadBalancers: [{ContainerName: app, ContainerPort: 8080, TargetGroupArn: !Ref Target}]
+Outputs:
+  LoadBalancerDns: {Value: !GetAtt Alb.DNSName}
+  TaskSecurityGroup: {Value: !Ref TaskSg, Description: Allow this SG to SQL Server port 1433}
+  TaskDefinition: {Value: !Ref Task}

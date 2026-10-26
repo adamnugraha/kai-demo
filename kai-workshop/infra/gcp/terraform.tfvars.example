@@ -1,0 +1,7 @@
+project_id = "YOUR-DEDICATED-LAB-PROJECT"
+image = "asia-southeast2-docker.pkg.dev/YOUR-PROJECT/kai-workshop/railbooking:rehearsed"
+runtime_service_account = "kai-lab-runtime@YOUR-PROJECT.iam.gserviceaccount.com"
+network = "kai-lab"
+subnetwork = "kai-lab-run"
+notifier_url = "https://YOUR-NOTIFICATION-HOST"
+# db_secret_id and token_secret_id are secret names, never secret values.
