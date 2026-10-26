@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+.env
+*.db*
+*.tfstate*
+*.tfplan
+*.tfvars
+!*.tfvars.example
+**/.terraform/
+secrets/
+artifacts/

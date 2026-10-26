@@ -1,0 +1,18 @@
+# Optional SQL Server integration profile. Non-production Developer edition.
+# Read SQL Server image terms before starting this override.
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD:?Set SQL_SA_PASSWORD locally}
+    volumes: ["sql-data:/var/opt/mssql"]
+    ports: ["127.0.0.1:1433:1433"]
+  app:
+    environment:
+      DB_PROVIDER: sqlserver
+      DB_CONNECTION: Server=sqlserver;Database=railbooking;User ID=railapp;Password=${SQL_APP_PASSWORD:?Set SQL_APP_PASSWORD locally};Encrypt=True;TrustServerCertificate=True
+      AUTO_INIT: "false"
+volumes:
+  sql-data:
